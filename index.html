@@ -16,6 +16,14 @@
   .emoji {
     cursor: pointer;
   }
+
+  .lock {
+    cursor: pointer;
+  }
+
+  .result {
+    clear: both;
+  }
 </style>
 <body>
 
@@ -24,9 +32,13 @@
   <img src="sad.png" style="float: right" class="emoji" onclick="receiveClick('sad');">
 </div>
 
-
-<div class="credit">
+<div class="result"> 
   <br><br><br><br><br><br><br>
+  <span class="lock" onclick="viewResults();">View results</a>
+  <div id="results"></div>
+</div>
+<div class="credit">
+<br><br><br>
   Image credit:<a href="https://twemoji.twitter.com/">Twemoji</a>
 </div>
 </body>
@@ -53,6 +65,18 @@
       enabled = true;
       $(".emoji").css("opacity", "1");
     }, 1000);
+  }
+
+  function viewResults() {
+    let password = prompt();
+    if (password === "1234" && (numHappy > 0 || numSad > 0)) {
+
+      let happyRate = (numHappy / (numHappy + numSad) * 100).toFixed(0);
+      let result = numHappy + " happy, " + numSad + " sad. Happy percentage: " + happyRate + "%";
+      $("#results").text(result);
+    }
+
+
   }
 </script>
 </html>
