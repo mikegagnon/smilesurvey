@@ -1,6 +1,10 @@
 <html>
 <head>
     <title>Smile Survey</title>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
 </head>
 <style>
   .credit {
@@ -8,12 +12,16 @@
     font-size: 70%;
     clear: both;
   }
+
+  .emoji {
+    cursor: pointer;
+  }
 </style>
 <body>
 
 <div>
-  <img src="happy.png" style="float: left">
-  <img src="sad.png" style="float: right">
+  <img src="happy.png" style="float: left" class="emoji" onclick="receiveClick('happy');">
+  <img src="sad.png" style="float: right" class="emoji" onclick="receiveClick('sad');">
 </div>
 
 
@@ -22,4 +30,29 @@
   Image credit:<a href="https://twemoji.twitter.com/">Twemoji</a>
 </div>
 </body>
+<script type="text/javascript">
+
+  let numHappy = 0;
+  let numSad = 0;
+  let enabled = true;
+
+  function receiveClick(emoji) {
+    if (!enabled) {
+      return;
+    }
+
+    if (emoji === "happy") {
+      numHappy++;
+    } else {
+      numSad++;
+    }
+
+    enabled = false;
+    $(".emoji").css("opacity", "0.5");
+    setTimeout(function(){
+      enabled = true;
+      $(".emoji").css("opacity", "1");
+    }, 1000);
+  }
+</script>
 </html>
